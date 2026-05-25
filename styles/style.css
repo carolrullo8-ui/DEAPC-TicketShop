@@ -1,0 +1,662 @@
+/* ================================================
+   TicketShop — style.css
+   Autores: [nomes do grupo]
+   
+   Tipos de seletores usados:
+   - Individuais: body, header, footer, table...
+   - Combinados descendentes: header nav a
+   - Combinados filho direto: .card-evento > img
+   - Combinados adjacent sibling: .meta-evento + p
+   - Classes: .btn-primario, .card-evento, .hero...
+   - Pseudo-classes: :hover, :focus, :nth-child, 
+                     :last-child, :valid, :invalid
+   - Pseudo-elementos: ::before, ::after, ::first-line
+   ================================================ */
+
+
+/* ------------------------------------------------
+   RESET E VARIÁVEIS GLOBAIS
+   Seletor universal (*) — aplica-se a todos os elementos
+   ------------------------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* inclui padding e border no tamanho total do elemento */
+}
+
+/* Variáveis CSS — definidas uma vez, usadas em todo o ficheiro */
+:root {
+    --cor-primaria:   #e63946; /* vermelho — botões, destaque */
+    --cor-secundaria: #1d3557; /* azul escuro — cabeçalho, títulos */
+    --cor-fundo:      #f1faee; /* verde muito claro — fundo da página */
+    --cor-texto:      #333333;
+    --cor-claro:      #ffffff;
+    --sombra:         0 2px 8px rgba(0, 0, 0, 0.15);
+    --raio:           8px;     /* arredondamento de cantos */
+}
+
+
+/* ------------------------------------------------
+   SELETOR INDIVIDUAL — body
+   ------------------------------------------------ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* página ocupa sempre a altura total do ecrã */
+}
+
+
+/* ------------------------------------------------
+   SELETOR INDIVIDUAL — header
+   ------------------------------------------------ */
+header {
+    background-color: var(--cor-secundaria);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; /* fica fixo no topo ao fazer scroll */
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--sombra);
+}
+
+/* SELETOR COMBINADO DESCENDENTE: header .logo
+   Aplica-se a qualquer elemento com classe .logo dentro de header */
+header .logo {
+    color: var(--cor-claro);
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* SELETOR COMBINADO DESCENDENTE: header nav a
+   Aplica-se aos links dentro de nav dentro de header */
+header nav a {
+    color: var(--cor-claro);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+/* PSEUDO-CLASSE :hover
+   Aplica-se quando o rato está em cima do elemento */
+header nav a:hover {
+    color: var(--cor-primaria);
+}
+
+
+/* ------------------------------------------------
+   CLASSE .btn-primario
+   Aplica-se a qualquer elemento com esta classe
+   ------------------------------------------------ */
+.btn-primario {
+    background-color: var(--cor-primaria);
+    color: var(--cor-claro);
+    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: var(--raio);
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* PSEUDO-CLASSE :hover na classe */
+.btn-primario:hover {
+    background-color: #c1121f;
+    transform: translateY(-2px); /* sobe ligeiramente */
+}
+
+/* PSEUDO-CLASSE :active — quando se clica */
+.btn-primario:active {
+    transform: translateY(0);
+}
+
+/* CLASSE .btn-remover — para botões de apagar na área admin */
+.btn-remover {
+    background-color: #6c757d;
+    color: var(--cor-claro);
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: var(--raio);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.btn-remover:hover {
+    background-color: #e63946;
+}
+
+/* CLASSE .btn-pagar — botão de pagamento maior */
+.btn-pagar {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+
+/* ------------------------------------------------
+   CLASSE .hero — secção de destaque no topo
+   ------------------------------------------------ */
+.hero {
+    background: linear-gradient(135deg, var(--cor-secundaria), #457b9d);
+    color: var(--cor-claro);
+    text-align: center;
+    padding: 5rem 2rem;
+}
+
+/* PSEUDO-ELEMENTO ::first-line
+   Aplica estilo apenas à primeira linha de texto */
+.hero h1::first-line {
+    font-size: 2.5rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* CLASSE .pesquisa-container */
+.pesquisa-container {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.pesquisa-container input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: var(--raio);
+    font-size: 1rem;
+    outline: none;
+}
+
+/* PSEUDO-CLASSE :focus — quando o campo está selecionado */
+.pesquisa-container input:focus {
+    box-shadow: 0 0 0 3px var(--cor-primaria);
+}
+
+
+/* ------------------------------------------------
+   CLASSE .secao — secções de conteúdo principal
+   ------------------------------------------------ */
+.secao {
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* PSEUDO-ELEMENTO ::before — adiciona conteúdo antes do h2 */
+.secao h2::before {
+    content: "🎟 ";
+}
+
+.secao h2 {
+    font-size: 1.8rem;
+    color: var(--cor-secundaria);
+    margin-bottom: 2rem;
+    border-bottom: 3px solid var(--cor-primaria);
+    padding-bottom: 0.5rem;
+}
+
+
+/* ------------------------------------------------
+   CLASSE .eventos-grid — grelha de cards de eventos
+   ------------------------------------------------ */
+.eventos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
+    gap: 1.5rem;
+}
+
+/* CLASSE .card-evento */
+.card-evento {
+    background-color: var(--cor-claro);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* PSEUDO-CLASSE :hover no card */
+.card-evento:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* SELETOR COMBINADO FILHO DIRETO: .card-evento > img
+   Aplica-se APENAS ao img que é filho DIRETO do card */
+.card-evento > img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover; /* recorta a imagem para caber sem distorcer */
+}
+
+/* SELETOR COMBINADO DESCENDENTE */
+.card-evento .card-corpo {
+    padding: 1rem;
+}
+
+/* PSEUDO-ELEMENTO ::after — adiciona seta depois do título */
+.card-evento .card-corpo h3::after {
+    content: " →";
+    color: var(--cor-primaria);
+    font-size: 0.9rem;
+}
+
+.card-evento .card-corpo h3 {
+    font-size: 1.1rem;
+    color: var(--cor-secundaria);
+    margin-bottom: 0.5rem;
+}
+
+.card-evento .card-corpo p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.3rem;
+}
+
+/* CLASSE .preco */
+.preco {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+    margin: 0.5rem 0;
+}
+
+
+/* ------------------------------------------------
+   CLASSE .filtros — barra de filtros
+   ------------------------------------------------ */
+.filtros {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* PSEUDO-CLASSE :nth-child(odd) — seletores ímpares */
+.filtros select:nth-child(odd) {
+    border-color: var(--cor-primaria);
+}
+
+.filtros select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: var(--raio);
+    font-size: 0.95rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+
+/* ------------------------------------------------
+   CLASSE .detalhe-evento — layout da página de detalhe
+   ------------------------------------------------ */
+.detalhe-evento {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* imagem | info */
+    gap: 2rem;
+    align-items: start;
+}
+
+.detalhe-evento img {
+    width: 100%;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+}
+
+.detalhe-info h1 {
+    font-size: 2rem;
+    color: var(--cor-secundaria);
+    margin-bottom: 1rem;
+}
+
+/* CLASSE .meta-evento */
+.meta-evento {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* SELETOR COMBINADO ADJACENT SIBLING: .meta-evento + p
+   Aplica-se ao parágrafo que vem IMEDIATAMENTE a seguir ao .meta-evento */
+.meta-evento + p {
+    line-height: 1.8;
+    color: var(--cor-texto);
+    font-size: 1rem;
+}
+
+
+/* ------------------------------------------------
+   CHECKOUT
+   ------------------------------------------------ */
+.checkout-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.painel-checkout {
+    background-color: var(--cor-claro);
+    padding: 1.5rem;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+}
+
+.painel-checkout h3 {
+    color: var(--cor-secundaria);
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--cor-primaria);
+    padding-bottom: 0.5rem;
+}
+
+/* CLASSE .form-grupo */
+.form-grupo {
+    margin-bottom: 1rem;
+}
+
+/* SELETOR COMBINADO DESCENDENTE */
+.form-grupo label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: var(--cor-secundaria);
+    font-size: 0.9rem;
+}
+
+.form-grupo input,
+.form-grupo select {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: var(--raio);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* PSEUDO-CLASSE :focus */
+.form-grupo input:focus,
+.form-grupo select:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.2);
+}
+
+/* PSEUDO-CLASSE :valid — campo com valor válido */
+.form-grupo input:valid {
+    border-color: #2a9d8f;
+}
+
+/* PSEUDO-CLASSE :invalid com :not(:placeholder-shown)
+   Só mostra erro depois de o utilizador ter escrito algo */
+.form-grupo input:invalid:not(:placeholder-shown) {
+    border-color: var(--cor-primaria);
+}
+
+/* CLASSE .resumo-compra */
+.resumo-compra {
+    background-color: #e8f4f8;
+    border-left: 4px solid var(--cor-secundaria);
+    padding: 1rem 1.5rem;
+    border-radius: 0 var(--raio) var(--raio) 0;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+
+/* ------------------------------------------------
+   ÁREA DE ADMINISTRAÇÃO
+   ------------------------------------------------ */
+.admin-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    flex: 1; /* ocupa o espaço disponível entre header e footer */
+}
+
+.admin-sidebar {
+    background-color: var(--cor-secundaria);
+    padding: 2rem 0;
+}
+
+.admin-sidebar a {
+    display: block;
+    color: var(--cor-claro);
+    padding: 0.9rem 1.5rem;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    border-left: 4px solid transparent;
+}
+
+/* PSEUDO-CLASSE :hover e CLASSE .ativo combinados */
+.admin-sidebar a:hover,
+.admin-sidebar a.ativo {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left-color: var(--cor-primaria);
+}
+
+.admin-conteudo {
+    padding: 2rem;
+    background-color: var(--cor-fundo);
+}
+
+/* SELETOR INDIVIDUAL — tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--cor-claro);
+    border-radius: var(--raio);
+    overflow: hidden;
+    box-shadow: var(--sombra);
+}
+
+/* PSEUDO-CLASSE :nth-child(even) — linhas pares com cor diferente (zebra) */
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* PSEUDO-CLASSE :hover nas linhas da tabela */
+tbody tr:hover {
+    background-color: #e8f4f8;
+}
+
+/* SELETOR INDIVIDUAL — cabeçalho da tabela */
+th {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-claro);
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+
+/* PSEUDO-CLASSE :last-child — remove a borda da última linha */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ------------------------------------------------
+   RODAPÉ
+   ------------------------------------------------ */
+footer {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-claro);
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+}
+
+/* PSEUDO-ELEMENTO ::after — adiciona texto depois do conteúdo do footer */
+footer::after {
+    content: " | Todos os direitos reservados";
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+
+/* ------------------------------------------------
+   MENU HAMBURGUER — visível apenas em mobile
+   ------------------------------------------------ */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+
+/* ================================================
+   MEDIA QUERIES — RESPONSIVIDADE
+   ================================================ */
+
+/* TABLET — ecrãs até 900px de largura */
+@media (max-width: 900px) {
+
+    /* Grid de 3 colunas passa a 2 */
+    .eventos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Detalhe do evento: imagem e info passam a coluna única */
+    .detalhe-evento {
+        grid-template-columns: 1fr;
+    }
+
+    /* Checkout: dois painéis passam a coluna única */
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Admin: sidebar vai para cima do conteúdo */
+    .admin-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-sidebar {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.5rem;
+    }
+
+    .admin-sidebar a {
+        padding: 0.5rem 1rem;
+        border-left: none;
+        border-bottom: 4px solid transparent;
+        font-size: 0.9rem;
+    }
+
+    .admin-sidebar a:hover,
+    .admin-sidebar a.ativo {
+        border-left-color: transparent;
+        border-bottom-color: var(--cor-primaria);
+    }
+}
+
+
+/* MOBILE — ecrãs até 600px de largura */
+@media (max-width: 600px) {
+
+    /* Grid passa a 1 coluna */
+    .eventos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* O menu de navegação fica escondido por defeito */
+    header nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 62px;
+        left: 0;
+        right: 0;
+        background-color: var(--cor-secundaria);
+        padding: 1rem 2rem;
+        z-index: 99;
+        box-shadow: var(--sombra);
+    }
+
+    /* Quando tem a classe .aberto (adicionada pelo JavaScript), aparece */
+    header nav.aberto {
+        display: flex;
+    }
+
+    header nav a {
+        margin: 0.5rem 0;
+        font-size: 1.1rem;
+    }
+
+    /* O botão hamburguer aparece */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Título do hero mais pequeno */
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    /* Pesquisa em coluna */
+    .pesquisa-container {
+        flex-direction: column;
+    }
+
+    /* Filtros em coluna */
+    .filtros {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filtros select,
+    .filtros button {
+        width: 100%;
+    }
+
+    /* Tabela admin com scroll horizontal */
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .secao {
+        padding: 1.5rem 1rem;
+    }
+}
