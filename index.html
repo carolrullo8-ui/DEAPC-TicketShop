@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicketShop — Compra de Bilhetes Online</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">🎟 TicketShop</a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="menu-principal">
+            <a href="index.html">Início</a>
+            <a href="eventos.html">Eventos</a>
+            <a href="#" class="btn-primario">Login / Registo</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Os melhores eventos ao teu alcance</h1>
+        <p>Compra bilhetes online de forma simples, rápida e segura.</p>
+        <div class="pesquisa-container">
+            <input type="text" placeholder="Pesquisar eventos...">
+            <button class="btn-primario">🔍 Pesquisar</button>
+        </div>
+    </section>
+
+    <main>
+        <section class="secao">
+            <h2>Eventos em Destaque</h2>
+            <div class="eventos-grid">
+
+                <article class="card-evento">
+                    <img src="images/evento1.jpg" alt="Concerto de Rock Lisboa">
+                    <div class="card-corpo">
+                        <h3>Concerto de Rock Lisboa</h3>
+                        <p>📅 15 de Junho de 2025</p>
+                        <p>📍 Altice Arena, Lisboa</p>
+                        <p class="preco">35,00 €</p>
+                        <a href="evento-detalhe.html" class="btn-primario">Ver Detalhes</a>
+                    </div>
+                </article>
+
+                <article class="card-evento">
+                    <img src="images/evento2.jpg" alt="Festival de Jazz Porto">
+                    <div class="card-corpo">
+                        <h3>Festival de Jazz Porto</h3>
+                        <p>📅 22 de Junho de 2025</p>
+                        <p>📍 Casa da Música, Porto</p>
+                        <p class="preco">20,00 €</p>
+                        <a href="evento-detalhe.html" class="btn-primario">Ver Detalhes</a>
+                    </div>
+                </article>
+
+                <article class="card-evento">
+                    <img src="images/evento3.jpg" alt="Peça de Teatro">
+                    <div class="card-corpo">
+                        <h3>Hamlet — Teatro Nacional</h3>
+                        <p>📅 30 de Junho de 2025</p>
+                        <p>📍 Teatro Nacional D. Maria II</p>
+                        <p class="preco">15,00 €</p>
+                        <a href="evento-detalhe.html" class="btn-primario">Ver Detalhes</a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 TicketShop</p>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

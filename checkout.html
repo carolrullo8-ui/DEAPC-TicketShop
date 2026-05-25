@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicketShop — Finalizar Compra</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">🎟 TicketShop</a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="menu-principal">
+            <a href="index.html">Início</a>
+            <a href="eventos.html">Eventos</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="secao">
+            <h2>Finalizar Compra</h2>
+
+            <div class="resumo-compra">
+                <strong>Resumo da compra:</strong>
+                &nbsp; Concerto de Rock Lisboa
+                &nbsp;|&nbsp; 15 Jun 2025
+                &nbsp;|&nbsp; Quantidade: 2 bilhetes
+                &nbsp;|&nbsp; <strong>Total: 70,00 €</strong>
+            </div>
+
+            <div class="checkout-container">
+
+                <div class="painel-checkout">
+                    <h3>1. Dados Pessoais</h3>
+                    <br>
+
+                    <div class="form-grupo">
+                        <label for="nome">Nome completo *</label>
+                        <input type="text" id="nome" name="nome"
+                               placeholder="Ex: João Silva" required>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="email">Endereço de email *</label>
+                        <input type="email" id="email" name="email"
+                               placeholder="Ex: joao@email.com" required>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="telefone">Número de telemóvel *</label>
+                        <input type="tel" id="telefone" name="telefone"
+                               placeholder="Ex: 912 345 678" required>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="nif">NIF (opcional)</label>
+                        <input type="text" id="nif" name="nif"
+                               placeholder="Ex: 123456789" maxlength="9">
+                    </div>
+                </div>
+
+                <div class="painel-checkout">
+                    <h3>2. Dados de Pagamento</h3>
+                    <br>
+
+                    <div class="form-grupo">
+                        <label for="titular">Nome no cartão *</label>
+                        <input type="text" id="titular" name="titular"
+                               placeholder="Ex: JOAO SILVA" required>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="cartao">Número do cartão *</label>
+                        <input type="text" id="cartao" name="cartao"
+                               placeholder="1234 5678 9012 3456"
+                               maxlength="19" required>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="validade">Validade *</label>
+                        <input type="text" id="validade" name="validade"
+                               placeholder="MM/AA" maxlength="5" required>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="cvv">CVV *</label>
+                        <input type="text" id="cvv" name="cvv"
+                               placeholder="123" maxlength="3" required>
+                    </div>
+
+                    <br>
+                    <button class="btn-primario btn-pagar">
+                        💳 Confirmar e Pagar 70,00 €
+                    </button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 TicketShop</p>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

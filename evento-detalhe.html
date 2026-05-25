@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicketShop — Concerto de Rock Lisboa</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">🎟 TicketShop</a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="menu-principal">
+            <a href="index.html">Início</a>
+            <a href="eventos.html">Eventos</a>
+            <a href="#" class="btn-primario">Login / Registo</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="secao">
+
+            <p><a href="eventos.html">← Voltar a todos os eventos</a></p>
+            <br>
+
+            <div class="detalhe-evento">
+
+                <img src="images/evento1.jpg" alt="Concerto de Rock Lisboa">
+
+                <div class="detalhe-info">
+                    <h1>Concerto de Rock Lisboa</h1>
+
+                    <div class="meta-evento">
+                        <span>📅 15 de Junho de 2025 — 21h00</span>
+                        <span>📍 Altice Arena, Lisboa</span>
+                        <span>🎸 Categoria: Música</span>
+                        <span>🎟 Bilhetes disponíveis: <strong>45</strong></span>
+                        <span>⏱ Duração: aproximadamente 3 horas</span>
+                    </div>
+
+                    <p>
+                        Uma noite inesquecível com os melhores grupos de rock nacional 
+                        e internacional. O espetáculo contará com palco principal e 
+                        palco secundário, com atuações a partir das 18h00. 
+                        Um evento imperdível para todos os fãs do género.
+                    </p>
+
+                    <br>
+                    <p class="preco">35,00 € / bilhete</p>
+                    <br>
+
+                    <div class="form-grupo">
+                        <label for="quantidade">Quantidade de bilhetes:</label>
+                        <select id="quantidade">
+                            <option value="1">1 bilhete — 35,00 €</option>
+                            <option value="2">2 bilhetes — 70,00 €</option>
+                            <option value="3">3 bilhetes — 105,00 €</option>
+                            <option value="4">4 bilhetes — 140,00 €</option>
+                        </select>
+                    </div>
+
+                    <br>
+                    <a href="checkout.html" class="btn-primario">🛒 Comprar Agora</a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 TicketShop</p>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
