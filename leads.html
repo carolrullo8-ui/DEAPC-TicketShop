@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketingAuto — Leads</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <header>
+        <a href="dashboard.html" class="logo">🎯 MarketingAuto</a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="menu-principal">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="campanhas.html">Campanhas</a>
+            <a href="leads.html" class="ativo">Leads</a>
+            <a href="relatorios.html">Relatórios</a>
+            <span class="nav-utilizador">Olá, <strong>Gestor</strong></span>
+            <a href="index.html" class="btn-primario">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="pagina-conteudo">
+
+            <div class="pagina-titulo">
+                <div>
+                    <h1>Leads</h1>
+                    <p>Gere os teus contactos e potenciais clientes</p>
+                </div>
+                <div class="titulo-acoes">
+                <!-- Agrupa os dois botões de ação -->
+                    <button class="btn-secundario" onclick="toggleImportar()">
+                        📥 Importar CSV
+                    </button>
+                    <!-- CSV: ficheiro de texto com dados separados por vírgulas -->
+                    <button class="btn-primario" onclick="toggleFormularioLead()">
+                        + Novo Lead
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- FORMULÁRIO DE NOVO LEAD (escondido por defeito) -->
+            <div class="formulario-painel" id="formulario-lead" style="display:none;">
+                <h3>Novo Lead</h3>
+                <br>
+                <div class="form-grid">
+
+                    <div class="form-grupo">
+                        <label for="lead-nome">Nome completo *</label>
+                        <input type="text" id="lead-nome" 
+                               placeholder="Ex: João Silva" required>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="lead-email">Email *</label>
+                        <input type="email" id="lead-email" 
+                               placeholder="Ex: joao@empresa.pt" required>
+                        <!-- type="email" valida o formato do email automaticamente -->
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="lead-empresa">Empresa</label>
+                        <input type="text" id="lead-empresa" 
+                               placeholder="Ex: XPTO Lda">
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="lead-segmento">Segmento *</label>
+                        <select id="lead-segmento" required>
+                            <option value="">Selecionar...</option>
+                            <option value="empresa">Empresa</option>
+                            <option value="startup">Startup</option>
+                            <option value="pme">PME</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="lead-telefone">Telefone</label>
+                        <input type="tel" id="lead-telefone" 
+                               placeholder="Ex: 912 345 678">
+                        <!-- type="tel" abre teclado numérico em mobile -->
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="lead-estado">Estado *</label>
+                        <select id="lead-estado" required>
+                            <option value="novo">Novo</option>
+                            <option value="contactado">Contactado</option>
+                            <option value="qualificado">Qualificado</option>
+                            <option value="convertido">Convertido</option>
+                            <option value="perdido">Perdido</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-acoes">
+                    <button class="btn-primario">💾 Guardar Lead</button>
+                    <button class="btn-secundario" onclick="toggleFormularioLead()">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- PAINEL DE IMPORTAÇÃO CSV (escondido por defeito) -->
+            <div class="formulario-painel" id="painel-importar" style="display:none;">
+                <h3>Importar Leads por CSV</h3>
+                <br>
+                <p>O ficheiro CSV deve ter as colunas: <strong>nome, email, empresa, segmento</strong></p>
+                <br>
+                <div class="form-grupo">
+                    <label for="ficheiro-csv">Selecionar ficheiro CSV</label>
+                    <input type="file" id="ficheiro-csv" accept=".csv">
+                    <!-- 
+                        type="file" abre o explorador de ficheiros
+                        accept=".csv" filtra para mostrar só ficheiros .csv
+                    -->
+                </div>
+                <div class="form-acoes">
+                    <button class="btn-primario">📥 Importar</button>
+                    <button class="btn-secundario" onclick="toggleImportar()">Cancelar</button>
+                </div>
+            </div>
+
+
+            <!-- FILTROS DE LEADS -->
+            <div class="filtros-barra">
+                <select id="filtro-segmento">
+                    <option value="">Todos os segmentos</option>
+                    <option value="empresa">Empresa</option>
+                    <option value="startup">Startup</option>
+                    <option value="pme">PME</option>
+                </select>
+
+                <select id="filtro-estado-lead">
+                    <option value="">Todos os estados</option>
+                    <option value="novo">Novo</option>
+                    <option value="contactado">Contactado</option>
+                    <option value="qualificado">Qualificado</option>
+                    <option value="convertido">Convertido</option>
+                    <option value="perdido">Perdido</option>
+                </select>
+
+                <input type="text" 
+                       id="filtro-pesquisa-lead"
+                       placeholder="🔍 Pesquisar leads...">
+
+                <button class="btn-secundario">Aplicar</button>
+            </div>
+
+
+            <!-- TABELA DE LEADS -->
+            <section class="card-secao">
+                <table class="tabela-completa">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" id="selecionar-todos">
+                                <!-- Checkbox para selecionar todos os leads -->
+                            </th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Empresa</th>
+                            <th>Segmento</th>
+                            <th>Estado</th>
+                            <th>Data Registo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td><strong>João Silva</strong></td>
+                            <td>joao@xpto.pt</td>
+                            <td>XPTO Lda</td>
+                            <td>Empresa</td>
+                            <td><span class="estado novo">Novo</span></td>
+                            <td>01/06/2025</td>
+                            <td class="acoes-celula">
+                                <button class="btn-acao" title="Editar">✏️</button>
+                                <button class="btn-acao btn-acao-perigo" title="Eliminar">🗑</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td><strong>Ana Costa</strong></td>
+                            <td>ana@startup.pt</td>
+                            <td>Startup ABC</td>
+                            <td>Startup</td>
+                            <td><span class="estado contactado">Contactado</span></td>
+                            <td>28/05/2025</td>
+                            <td class="acoes-celula">
+                                <button class="btn-acao" title="Editar">✏️</button>
+                                <button class="btn-acao btn-acao-perigo" title="Eliminar">🗑</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td><strong>Pedro Ferreira</strong></td>
+                            <td>pedro@pme.pt</td>
+                            <td>PME XYZ</td>
+                            <td>PME</td>
+                            <td><span class="estado convertido">Convertido</span></td>
+                            <td>15/05/2025</td>
+                            <td class="acoes-celula">
+                                <button class="btn-acao" title="Editar">✏️</button>
+                                <button class="btn-acao btn-acao-perigo" title="Eliminar">🗑</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td><strong>Maria Santos</strong></td>
+                            <td>maria@tech.pt</td>
+                            <td>Tech SA</td>
+                            <td>Empresa</td>
+                            <td><span class="estado novo">Novo</span></td>
+                            <td>03/06/2025</td>
+                            <td class="acoes-celula">
+                                <button class="btn-acao" title="Editar">✏️</button>
+                                <button class="btn-acao btn-acao-perigo" title="Eliminar">🗑</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 MarketingAuto</p>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

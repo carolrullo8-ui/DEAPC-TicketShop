@@ -3,161 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TicketShop — Área de Administração</title>
+    <title>MarketingAuto — Administração</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
 
     <header>
-        <a href="index.html" class="logo">🎟 TicketShop Admin</a>
+        <a href="dashboard.html" class="logo">🎯 MarketingAuto Admin</a>
         <nav>
-            <a href="index.html">Ver Site</a>
-            <a href="#" class="btn-primario">Logout</a>
+            <a href="dashboard.html">Ver Plataforma</a>
+            <a href="index.html" class="btn-primario">Logout</a>
         </nav>
     </header>
 
     <div class="admin-layout">
 
+        <!-- MENU LATERAL -->
         <aside class="admin-sidebar">
-            <a href="#eventos" class="ativo">🎫 Gestão de Eventos</a>
-            <a href="#vendas">📊 Relatório de Vendas</a>
-            <a href="#utilizadores">👥 Utilizadores</a>
+            <a href="#utilizadores" class="ativo">👥 Utilizadores</a>
+            <a href="#relatorios-admin">📊 Relatórios</a>
+            <a href="#acessos">🔐 Registos de Acesso</a>
+            <a href="#configuracoes">⚙️ Configurações</a>
         </aside>
 
         <main class="admin-conteudo">
 
-            <!-- SECÇÃO: EVENTOS -->
-            <section id="eventos">
-                <h2>Gestão de Eventos</h2>
-                <br>
-                <button class="btn-primario">+ Adicionar Novo Evento</button>
-                <br><br>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nome do Evento</th>
-                            <th>Data</th>
-                            <th>Local</th>
-                            <th>Total Bilhetes</th>
-                            <th>Vendidos</th>
-                            <th>Disponíveis</th>
-                            <th>Preço</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Concerto de Rock Lisboa</td>
-                            <td>15/06/2025</td>
-                            <td>Altice Arena</td>
-                            <td>500</td>
-                            <td>455</td>
-                            <td>45</td>
-                            <td>35,00 €</td>
-                            <td>
-                                <button class="btn-primario">✏️ Editar</button>
-                                <button class="btn-remover">🗑 Remover</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Festival de Jazz Porto</td>
-                            <td>22/06/2025</td>
-                            <td>Casa da Música</td>
-                            <td>300</td>
-                            <td>180</td>
-                            <td>120</td>
-                            <td>20,00 €</td>
-                            <td>
-                                <button class="btn-primario">✏️ Editar</button>
-                                <button class="btn-remover">🗑 Remover</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Hamlet — Teatro Nacional</td>
-                            <td>30/06/2025</td>
-                            <td>Teatro D. Maria II</td>
-                            <td>200</td>
-                            <td>165</td>
-                            <td>35</td>
-                            <td>15,00 €</td>
-                            <td>
-                                <button class="btn-primario">✏️ Editar</button>
-                                <button class="btn-remover">🗑 Remover</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <br><br>
-
-            <!-- SECÇÃO: VENDAS -->
-            <section id="vendas">
-                <h2>Relatório de Vendas</h2>
-                <br>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID Compra</th>
-                            <th>Cliente</th>
-                            <th>Evento</th>
-                            <th>Quantidade</th>
-                            <th>Total Pago</th>
-                            <th>Data Compra</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#0001</td>
-                            <td>Ana Ferreira</td>
-                            <td>Concerto de Rock Lisboa</td>
-                            <td>2</td>
-                            <td>70,00 €</td>
-                            <td>10/05/2025</td>
-                        </tr>
-                        <tr>
-                            <td>#0002</td>
-                            <td>Carlos Mendes</td>
-                            <td>Festival de Jazz Porto</td>
-                            <td>1</td>
-                            <td>20,00 €</td>
-                            <td>11/05/2025</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <br><br>
-
-            <!-- SECÇÃO: UTILIZADORES -->
+            <!-- SECÇÃO UTILIZADORES -->
             <section id="utilizadores">
-                <h2>Gestão de Utilizadores</h2>
+                <div class="pagina-titulo">
+                    <h2>Gestão de Utilizadores</h2>
+                    <button class="btn-primario">+ Novo Utilizador</button>
+                </div>
                 <br>
-                <table>
+                <table class="tabela-completa">
                     <thead>
                         <tr>
                             <th>Nome</th>
+                            <th>Username</th>
                             <th>Email</th>
-                            <th>Telefone</th>
-                            <th>Nº Compras</th>
+                            <th>Tipo</th>
+                            <th>Último Acesso</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Ana Ferreira</td>
-                            <td>ana@email.com</td>
-                            <td>912 111 222</td>
-                            <td>3</td>
-                            <td><button class="btn-remover">🗑 Remover</button></td>
+                            <td>Gestor Principal</td>
+                            <td>gestor1</td>
+                            <td>gestor@empresa.pt</td>
+                            <td><span class="estado ativa">Gestor</span></td>
+                            <td>03/06/2025 14:32</td>
+                            <td class="acoes-celula">
+                                <button class="btn-acao" title="Editar">✏️</button>
+                                <button class="btn-acao btn-acao-perigo" title="Remover">🗑</button>
+                            </td>
                         </tr>
                         <tr>
-                            <td>Carlos Mendes</td>
-                            <td>carlos@email.com</td>
-                            <td>963 333 444</td>
-                            <td>1</td>
-                            <td><button class="btn-remover">🗑 Remover</button></td>
+                            <td>Administrador</td>
+                            <td>admin</td>
+                            <td>admin@empresa.pt</td>
+                            <td><span class="estado novo">Admin</span></td>
+                            <td>03/06/2025 16:00</td>
+                            <td class="acoes-celula">
+                                <button class="btn-acao" title="Editar">✏️</button>
+                                <button class="btn-acao btn-acao-perigo" title="Remover">🗑</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <br><br>
+
+            <!-- SECÇÃO REGISTOS DE ACESSO -->
+            <section id="acessos">
+                <h2>Registos de Acesso</h2>
+                <br>
+                <table class="tabela-completa">
+                    <thead>
+                        <tr>
+                            <th>Utilizador</th>
+                            <th>Data e Hora</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>gestor1</td>
+                            <td>03/06/2025 14:32</td>
+                            <td>Login</td>
+                        </tr>
+                        <tr>
+                            <td>admin</td>
+                            <td>03/06/2025 16:00</td>
+                            <td>Login</td>
+                        </tr>
+                        <tr>
+                            <td>gestor1</td>
+                            <td>02/06/2025 09:15</td>
+                            <td>Login</td>
                         </tr>
                     </tbody>
                 </table>
@@ -167,7 +111,7 @@
     </div>
 
     <footer>
-        <p>© 2025 TicketShop</p>
+        <p>© 2025 MarketingAuto</p>
     </footer>
 
 </body>

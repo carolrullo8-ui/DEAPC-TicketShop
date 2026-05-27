@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketingAuto — Campanhas</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <header>
+        <a href="dashboard.html" class="logo">🎯 MarketingAuto</a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="menu-principal">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="campanhas.html" class="ativo">Campanhas</a>
+            <a href="leads.html">Leads</a>
+            <a href="relatorios.html">Relatórios</a>
+            <span class="nav-utilizador">Olá, <strong>Gestor</strong></span>
+            <a href="index.html" class="btn-primario">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="pagina-conteudo">
+
+            <!-- TÍTULO E BOTÃO DE AÇÃO -->
+            <div class="pagina-titulo">
+                <div>
+                    <h1>Campanhas</h1>
+                    <p>Gere todas as tuas campanhas de marketing</p>
+                </div>
+                <button class="btn-primario" onclick="toggleFormulario()">
+                    + Nova Campanha
+                </button>
+                <!-- 
+                    onclick="toggleFormulario()" mostra/esconde o formulário
+                    A função está definida no scripts/main.js
+                -->
+            </div>
+
+
+            <!-- FORMULÁRIO DE NOVA CAMPANHA (escondido por defeito) -->
+            <div class="formulario-painel" id="formulario-campanha" style="display:none;">
+            <!-- 
+                id="formulario-campanha" permite ao JavaScript encontrar este elemento
+                style="display:none" esconde o painel inicialmente
+                O JavaScript muda para display:block quando o utilizador clica "+ Nova Campanha"
+            -->
+
+                <h3>Nova Campanha</h3>
+                <br>
+
+                <div class="form-grid">
+                <!-- CSS Grid com 2 colunas para os campos do formulário -->
+
+                    <div class="form-grupo">
+                        <label for="camp-nome">Nome da Campanha *</label>
+                        <input type="text" id="camp-nome" 
+                               placeholder="Ex: Newsletter Julho 2025" required>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="camp-publico">Público-alvo *</label>
+                        <select id="camp-publico" required>
+                            <option value="">Selecionar...</option>
+                            <option value="empresas">Empresas</option>
+                            <option value="startups">Startups</option>
+                            <option value="pmes">PMEs</option>
+                            <option value="todos">Todos os leads</option>
+                        </select>
+                        <!-- 
+                            <select> cria um dropdown
+                            O utilizador escolhe o público-alvo da campanha
+                        -->
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="camp-data-inicio">Data de Início *</label>
+                        <input type="date" id="camp-data-inicio" required>
+                        <!-- type="date" mostra um seletor de data no browser -->
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="camp-data-fim">Data de Fim</label>
+                        <input type="date" id="camp-data-fim">
+                        <!-- Sem required — a campanha pode não ter data de fim definida -->
+                    </div>
+
+                    <div class="form-grupo form-grupo-largo">
+                    <!-- class="form-grupo-largo" faz o campo ocupar as 2 colunas -->
+
+                        <label for="camp-descricao">Descrição</label>
+                        <textarea id="camp-descricao" 
+                                  placeholder="Descreve o objetivo desta campanha..."
+                                  rows="3"></textarea>
+                        <!-- 
+                            <textarea> é um campo de texto multilinha
+                            rows="3" define a altura inicial em linhas
+                        -->
+                    </div>
+
+                </div>
+                <!-- fim do form-grid -->
+
+                <div class="form-acoes">
+                <!-- Botões de ação do formulário -->
+
+                    <button class="btn-primario">💾 Guardar Campanha</button>
+                    <button class="btn-secundario" onclick="toggleFormulario()">
+                        Cancelar
+                    </button>
+                    <!-- btn-secundario tem estilo diferente — menos destaque -->
+
+                </div>
+
+            </div>
+            <!-- fim do formulário -->
+
+
+            <!-- FILTROS -->
+            <div class="filtros-barra">
+                <select id="filtro-estado">
+                    <option value="">Todos os estados</option>
+                    <option value="ativa">Ativas</option>
+                    <option value="pausada">Pausadas</option>
+                    <option value="rascunho">Rascunhos</option>
+                    <option value="concluida">Concluídas</option>
+                </select>
+
+                <input type="text" 
+                       id="filtro-pesquisa" 
+                       placeholder="🔍 Pesquisar campanhas...">
+
+                <button class="btn-secundario">Aplicar</button>
+            </div>
+
+
+            <!-- TABELA DE CAMPANHAS -->
+            <section class="card-secao">
+
+                <table class="tabela-completa">
+                <!-- class="tabela-completa" aplica estilo de tabela grande -->
+
+                    <thead>
+                        <tr>
+                            <th>Nome da Campanha</th>
+                            <th>Público-alvo</th>
+                            <th>Data Início</th>
+                            <th>Data Fim</th>
+                            <th>Leads</th>
+                            <th>Aberturas</th>
+                            <th>Estado</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td><strong>Campanha Verão 2025</strong></td>
+                            <td>Empresas</td>
+                            <td>01/06/2025</td>
+                            <td>31/08/2025</td>
+                            <td>120</td>
+                            <td>54 (45%)</td>
+                            <td><span class="estado ativa">Ativa</span></td>
+                            <td class="acoes-celula">
+                            <!-- Célula com botões de ação -->
+                                <button class="btn-acao" title="Ver relatório">
+                                    📊
+                                </button>
+                                <!-- title="..." aparece como tooltip ao passar o rato -->
+                                <button class="btn-acao" title="Editar">✏️</button>
+                                <button class="btn-acao btn-acao-perigo" title="Eliminar">
+                                    🗑
+                                </button>
+                                <!-- btn-acao-perigo aplica cor vermelha ao hover -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Newsletter Junho</strong></td>
+                            <td>Todos os leads</td>
+                            <td>01/06/2025</td>
+                            <td>30/06/2025</td>
+                            <td>85</td>
+                            <td>32 (38%)</td>
+                            <td><span class="estado pausada">Pausada</span></td>
+                            <td class="acoes-celula">
+                                <button class="btn-acao" title="Ver relatório">📊</button>
+                                <button class="btn-acao" title="Editar">✏️</button>
+                                <button class="btn-acao btn-acao-perigo" title="Eliminar">🗑</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Promoção PMEs</strong></td>
+                            <td>PMEs</td>
+                            <td>15/07/2025</td>
+                            <td>—</td>
+                            <td>0</td>
+                            <td>—</td>
+                            <td><span class="estado rascunho">Rascunho</span></td>
+                            <td class="acoes-celula">
+                                <button class="btn-acao" title="Ver relatório">📊</button>
+                                <button class="btn-acao" title="Editar">✏️</button>
+                                <button class="btn-acao btn-acao-perigo" title="Eliminar">🗑</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Black Friday Antecipado</strong></td>
+                            <td>Startups</td>
+                            <td>01/11/2025</td>
+                            <td>30/11/2025</td>
+                            <td>210</td>
+                            <td>89 (42%)</td>
+                            <td><span class="estado ativa">Ativa</span></td>
+                            <td class="acoes-celula">
+                                <button class="btn-acao" title="Ver relatório">📊</button>
+                                <button class="btn-acao" title="Editar">✏️</button>
+                                <button class="btn-acao btn-acao-perigo" title="Eliminar">🗑</button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 MarketingAuto</p>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

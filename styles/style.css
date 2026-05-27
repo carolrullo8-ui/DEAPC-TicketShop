@@ -1,38 +1,41 @@
 /* ================================================
-   TicketShop — style.css
-   Autores: Carolina Rullo
+   MarketingAuto — style.css
    
    Tipos de seletores usados:
-   - Individuais: body, header, footer, table...
-   - Combinados descendentes: header nav a
-   - Combinados filho direto: .card-evento > img
-   - Combinados adjacent sibling: .meta-evento + p
-   - Classes: .btn-primario, .card-evento, .hero...
-   - Pseudo-classes: :hover, :focus, :nth-child, 
-                     :last-child, :valid, :invalid
-   - Pseudo-elementos: ::before, ::after, ::first-line
+   - Individuais: body, header, footer, table, th, td
+   - Combinados descendentes: header nav a, .card-metrica .metrica-valor
+   - Combinados filho direto: .admin-layout > aside
+   - Combinados adjacent sibling: .form-grupo + .form-grupo
+   - Classes: .btn-primario, .card-metrica, .estado...
+   - Pseudo-classes: :hover, :focus, :nth-child, :last-child, :valid, :invalid
+   - Pseudo-elementos: ::before, ::after, ::placeholder
    ================================================ */
 
 
 /* ------------------------------------------------
    RESET E VARIÁVEIS GLOBAIS
-   Seletor universal (*) — aplica-se a todos os elementos
+   Seletor universal — aplica-se a todos os elementos
    ------------------------------------------------ */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* inclui padding e border no tamanho total do elemento */
+    box-sizing: border-box;
+    /* inclui padding e border no tamanho total do elemento */
 }
 
 /* Variáveis CSS — definidas uma vez, usadas em todo o ficheiro */
 :root {
-    --cor-primaria:   #e63946; /* vermelho — botões, destaque */
-    --cor-secundaria: #1d3557; /* azul escuro — cabeçalho, títulos */
-    --cor-fundo:      #f1faee; /* verde muito claro — fundo da página */
-    --cor-texto:      #333333;
-    --cor-claro:      #ffffff;
-    --sombra:         0 2px 8px rgba(0, 0, 0, 0.15);
-    --raio:           8px;     /* arredondamento de cantos */
+    --cor-primaria:    #6366f1; /* roxo/índigo — cor principal da marca */
+    --cor-secundaria:  #1e1b4b; /* azul muito escuro — cabeçalho, sidebar */
+    --cor-fundo:       #f8fafc; /* cinzento muito claro — fundo das páginas */
+    --cor-texto:       #1e293b; /* quase preto — texto principal */
+    --cor-texto-claro: #64748b; /* cinzento — texto secundário */
+    --cor-claro:       #ffffff;
+    --cor-borda:       #e2e8f0; /* cinzento claro — bordas */
+    --sombra:          0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    --sombra-media:    0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+    --raio:            8px;
+    --raio-grande:     12px;
 }
 
 
@@ -40,503 +43,862 @@
    SELETOR INDIVIDUAL — body
    ------------------------------------------------ */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
     line-height: 1.6;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* página ocupa sempre a altura total do ecrã */
+    /* flex em coluna para o footer ficar sempre no fundo */
 }
 
 
 /* ------------------------------------------------
-   SELETOR INDIVIDUAL — header
+   PÁGINA DE LOGIN — estilos específicos
    ------------------------------------------------ */
+
+/* CLASSE — fundo especial só para a página de login */
+.pagina-login {
+    background: linear-gradient(135deg, var(--cor-secundaria) 0%, #4338ca 100%);
+    /* Gradiente diagonal do azul escuro para o roxo */
+}
+
+/* CLASSE — cabeçalho minimalista do login */
+.header-login {
+    background: transparent;
+    /* Sem fundo — mistura com o gradiente da página */
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* CLASSE — área central que centra o formulário */
+.main-login {
+    flex: 1;
+    /* Ocupa todo o espaço disponível entre header e footer */
+    display: flex;
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    padding: 2rem;
+}
+
+/* CLASSE — caixa branca com o formulário */
+.caixa-login {
+    background-color: var(--cor-claro);
+    border-radius: var(--raio-grande);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    /* Sombra mais pronunciada para dar efeito de elevação */
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 420px;
+    /* Largura máxima — em mobile ocupa tudo */
+}
+
+/* CLASSE — zona do título dentro da caixa de login */
+.login-titulo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* SELETOR COMBINADO DESCENDENTE */
+.login-titulo h1 {
+    font-size: 1.8rem;
+    color: var(--cor-secundaria);
+    margin-bottom: 0.5rem;
+}
+
+.login-titulo p {
+    color: var(--cor-texto-claro);
+    font-size: 0.95rem;
+}
+
+/* CLASSE — rodapé da página de login */
+.footer-login {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    padding: 1.5rem;
+}
+
+
+/* ------------------------------------------------
+   CABEÇALHO PRINCIPAL — todas as páginas exceto login
+   ------------------------------------------------ */
+
+/* SELETOR INDIVIDUAL */
 header {
     background-color: var(--cor-secundaria);
-    padding: 1rem 2rem;
+    padding: 0 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky; /* fica fixo no topo ao fazer scroll */
+    height: 60px;
+    /* Altura fixa para o cabeçalho */
+    position: sticky;
     top: 0;
     z-index: 100;
     box-shadow: var(--sombra);
 }
 
-/* SELETOR COMBINADO DESCENDENTE: header .logo
-   Aplica-se a qualquer elemento com classe .logo dentro de header */
-header .logo {
+/* CLASSE — logo clicável */
+.logo {
     color: var(--cor-claro);
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     font-weight: 700;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-/* SELETOR COMBINADO DESCENDENTE: header nav a
-   Aplica-se aos links dentro de nav dentro de header */
+/* SELETOR COMBINADO DESCENDENTE: header nav a */
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 header nav a {
-    color: var(--cor-claro);
+    color: rgba(255, 255, 255, 0.8);
+    /* Branco com 80% de opacidade — menos destaque que o logo */
     text-decoration: none;
-    margin-left: 1.5rem;
-    font-size: 1rem;
-    transition: color 0.3s;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--raio);
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    /* Transição suave em todas as propriedades */
 }
 
-/* PSEUDO-CLASSE :hover
-   Aplica-se quando o rato está em cima do elemento */
+/* PSEUDO-CLASSE :hover */
 header nav a:hover {
-    color: var(--cor-primaria);
+    color: var(--cor-claro);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* CLASSE .ativo — página atual no menu */
+header nav a.ativo {
+    color: var(--cor-claro);
+    background-color: rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+}
+
+/* CLASSE — nome do utilizador no menu */
+.nav-utilizador {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    padding: 0 0.5rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    /* Separador visual antes do nome */
+    margin-left: 0.5rem;
+    padding-left: 1rem;
 }
 
 
 /* ------------------------------------------------
-   CLASSE .btn-primario
-   Aplica-se a qualquer elemento com esta classe
+   BOTÕES
    ------------------------------------------------ */
+
+/* CLASSE .btn-primario */
 .btn-primario {
     background-color: var(--cor-primaria);
     color: var(--cor-claro);
-    padding: 0.6rem 1.4rem;
+    padding: 0.5rem 1.2rem;
     border: none;
     border-radius: var(--raio);
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
     text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: background-color 0.2s, transform 0.1s;
 }
 
-/* PSEUDO-CLASSE :hover na classe */
+/* PSEUDO-CLASSE :hover */
 .btn-primario:hover {
-    background-color: #c1121f;
-    transform: translateY(-2px); /* sobe ligeiramente */
+    background-color: #4f46e5;
+    /* Roxo mais escuro ao hover */
+    transform: translateY(-1px);
 }
 
-/* PSEUDO-CLASSE :active — quando se clica */
+/* PSEUDO-CLASSE :active */
 .btn-primario:active {
     transform: translateY(0);
 }
 
-/* CLASSE .btn-remover — para botões de apagar na área admin */
-.btn-remover {
-    background-color: #6c757d;
-    color: var(--cor-claro);
-    padding: 0.4rem 0.8rem;
-    border: none;
+/* CLASSE .btn-secundario — menos destaque */
+.btn-secundario {
+    background-color: transparent;
+    color: var(--cor-texto);
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--cor-borda);
     border-radius: var(--raio);
     cursor: pointer;
     font-size: 0.9rem;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s, border-color 0.2s;
 }
 
-.btn-remover:hover {
-    background-color: #e63946;
-}
-
-/* CLASSE .btn-pagar — botão de pagamento maior */
-.btn-pagar {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-}
-
-
-/* ------------------------------------------------
-   CLASSE .hero — secção de destaque no topo
-   ------------------------------------------------ */
-.hero {
-    background: linear-gradient(135deg, var(--cor-secundaria), #457b9d);
-    color: var(--cor-claro);
-    text-align: center;
-    padding: 5rem 2rem;
-}
-
-/* PSEUDO-ELEMENTO ::first-line
-   Aplica estilo apenas à primeira linha de texto */
-.hero h1::first-line {
-    font-size: 2.5rem;
-}
-
-.hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-}
-
-/* CLASSE .pesquisa-container */
-.pesquisa-container {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.pesquisa-container input {
-    flex: 1;
-    padding: 0.8rem 1rem;
-    border: none;
-    border-radius: var(--raio);
-    font-size: 1rem;
-    outline: none;
-}
-
-/* PSEUDO-CLASSE :focus — quando o campo está selecionado */
-.pesquisa-container input:focus {
-    box-shadow: 0 0 0 3px var(--cor-primaria);
-}
-
-
-/* ------------------------------------------------
-   CLASSE .secao — secções de conteúdo principal
-   ------------------------------------------------ */
-.secao {
-    padding: 3rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-/* PSEUDO-ELEMENTO ::before — adiciona conteúdo antes do h2 */
-.secao h2::before {
-    content: "🎟 ";
-}
-
-.secao h2 {
-    font-size: 1.8rem;
-    color: var(--cor-secundaria);
-    margin-bottom: 2rem;
-    border-bottom: 3px solid var(--cor-primaria);
-    padding-bottom: 0.5rem;
-}
-
-
-/* ------------------------------------------------
-   CLASSE .eventos-grid — grelha de cards de eventos
-   ------------------------------------------------ */
-.eventos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
-    gap: 1.5rem;
-}
-
-/* CLASSE .card-evento */
-.card-evento {
-    background-color: var(--cor-claro);
-    border-radius: var(--raio);
-    box-shadow: var(--sombra);
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-/* PSEUDO-CLASSE :hover no card */
-.card-evento:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* SELETOR COMBINADO FILHO DIRETO: .card-evento > img
-   Aplica-se APENAS ao img que é filho DIRETO do card */
-.card-evento > img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover; /* recorta a imagem para caber sem distorcer */
-}
-
-/* SELETOR COMBINADO DESCENDENTE */
-.card-evento .card-corpo {
-    padding: 1rem;
-}
-
-/* PSEUDO-ELEMENTO ::after — adiciona seta depois do título */
-.card-evento .card-corpo h3::after {
-    content: " →";
-    color: var(--cor-primaria);
-    font-size: 0.9rem;
-}
-
-.card-evento .card-corpo h3 {
-    font-size: 1.1rem;
-    color: var(--cor-secundaria);
-    margin-bottom: 0.5rem;
-}
-
-.card-evento .card-corpo p {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 0.3rem;
-}
-
-/* CLASSE .preco */
-.preco {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--cor-primaria);
-    margin: 0.5rem 0;
-}
-
-
-/* ------------------------------------------------
-   CLASSE .filtros — barra de filtros
-   ------------------------------------------------ */
-.filtros {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-/* PSEUDO-CLASSE :nth-child(odd) — seletores ímpares */
-.filtros select:nth-child(odd) {
+/* PSEUDO-CLASSE :hover */
+.btn-secundario:hover {
+    background-color: var(--cor-fundo);
     border-color: var(--cor-primaria);
 }
 
-.filtros select {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: var(--raio);
-    font-size: 0.95rem;
-    background-color: white;
-    cursor: pointer;
+/* CLASSE — botão de login maior */
+.btn-login {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    justify-content: center;
+    margin-top: 0.5rem;
 }
 
 
 /* ------------------------------------------------
-   CLASSE .detalhe-evento — layout da página de detalhe
+   CONTEÚDO DAS PÁGINAS
    ------------------------------------------------ */
-.detalhe-evento {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* imagem | info */
-    gap: 2rem;
-    align-items: start;
-}
 
-.detalhe-evento img {
+/* CLASSE — contentor principal de cada página */
+.pagina-conteudo {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
     width: 100%;
-    border-radius: var(--raio);
+    flex: 1;
+}
+
+/* CLASSE — linha com título + botão de ação */
+.pagina-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+/* SELETOR COMBINADO DESCENDENTE */
+.pagina-titulo h1 {
+    font-size: 1.8rem;
+    color: var(--cor-texto);
+    font-weight: 700;
+}
+
+.pagina-titulo p {
+    color: var(--cor-texto-claro);
+    margin-top: 0.25rem;
+    font-size: 0.95rem;
+}
+
+/* CLASSE — agrupa múltiplos botões no título */
+.titulo-acoes {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    /* Impede que os botões encolham */
+}
+
+
+/* ------------------------------------------------
+   CARDS DE MÉTRICAS — Dashboard e Relatórios
+   ------------------------------------------------ */
+
+/* CLASSE — grelha de 4 cards */
+.metricas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* CLASSE — cada card de métrica */
+.card-metrica {
+    background-color: var(--cor-claro);
+    border-radius: var(--raio-grande);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     box-shadow: var(--sombra);
+    border: 1px solid var(--cor-borda);
+    transition: box-shadow 0.2s, transform 0.2s;
 }
 
-.detalhe-info h1 {
+/* PSEUDO-CLASSE :hover no card */
+.card-metrica:hover {
+    box-shadow: var(--sombra-media);
+    transform: translateY(-2px);
+}
+
+/* PSEUDO-ELEMENTO ::before — linha colorida à esquerda de cada card */
+.card-metrica::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: var(--cor-primaria);
+    border-radius: var(--raio) 0 0 var(--raio);
+}
+
+.card-metrica {
+    position: relative;
+    /* Necessário para o ::before funcionar */
+    overflow: hidden;
+}
+
+/* CLASSE — ícone grande do card */
+.metrica-icone {
     font-size: 2rem;
-    color: var(--cor-secundaria);
-    margin-bottom: 1rem;
+    flex-shrink: 0;
 }
 
-/* CLASSE .meta-evento */
-.meta-evento {
+/* SELETOR COMBINADO DESCENDENTE */
+.metrica-info {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    font-size: 1rem;
-    color: #555;
 }
 
-/* SELETOR COMBINADO ADJACENT SIBLING: .meta-evento + p
-   Aplica-se ao parágrafo que vem IMEDIATAMENTE a seguir ao .meta-evento */
-.meta-evento + p {
-    line-height: 1.8;
+/* CLASSE — valor numérico em destaque */
+.metrica-valor {
+    font-size: 1.8rem;
+    font-weight: 700;
     color: var(--cor-texto);
-    font-size: 1rem;
+    line-height: 1;
+}
+
+/* CLASSE — descrição da métrica */
+.metrica-label {
+    font-size: 0.8rem;
+    color: var(--cor-texto-claro);
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    /* Texto em maiúsculas */
+    letter-spacing: 0.05em;
+    /* Espaçamento entre letras */
+}
+
+/* CLASSE — percentagem abaixo do valor */
+.metrica-percentagem {
+    font-size: 0.9rem;
+    color: var(--cor-primaria);
+    font-weight: 600;
 }
 
 
 /* ------------------------------------------------
-   CHECKOUT
+   GRID DO DASHBOARD
    ------------------------------------------------ */
-.checkout-container {
+
+/* CLASSE — grelha de 2 colunas do dashboard */
+.dashboard-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    max-width: 900px;
-    margin: 0 auto;
+    gap: 1.5rem;
 }
 
-.painel-checkout {
+
+/* ------------------------------------------------
+   CARDS DE SECÇÃO — caixas brancas com conteúdo
+   ------------------------------------------------ */
+
+/* CLASSE — caixa branca com sombra */
+.card-secao {
     background-color: var(--cor-claro);
+    border-radius: var(--raio-grande);
     padding: 1.5rem;
+    box-shadow: var(--sombra);
+    border: 1px solid var(--cor-borda);
+    margin-bottom: 1.5rem;
+}
+
+/* SELETOR COMBINADO DESCENDENTE */
+.card-secao h2 {
+    font-size: 1.1rem;
+    color: var(--cor-texto);
+    font-weight: 600;
+}
+
+/* CLASSE — cabeçalho da secção com título e link */
+.secao-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--cor-borda);
+    /* Linha separadora entre título e conteúdo */
+}
+
+/* CLASSE — link "Ver todas" */
+.link-ver-todas {
+    color: var(--cor-primaria);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* PSEUDO-CLASSE :hover */
+.link-ver-todas:hover {
+    text-decoration: underline;
+}
+
+
+/* ------------------------------------------------
+   BADGES DE ESTADO
+   ------------------------------------------------ */
+
+/* CLASSE base para todos os badges */
+.estado {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 9999px;
+    /* Border-radius muito alto cria forma de pílula */
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* CLASSES específicas por estado — combinadas com .estado */
+.estado.ativa,
+.estado.convertido {
+    background-color: #dcfce7; /* verde claro */
+    color: #166534;            /* verde escuro */
+}
+
+.estado.pausada,
+.estado.contactado {
+    background-color: #fef9c3; /* amarelo claro */
+    color: #854d0e;            /* amarelo escuro */
+}
+
+.estado.rascunho,
+.estado.perdido {
+    background-color: #f1f5f9; /* cinzento claro */
+    color: #475569;            /* cinzento escuro */
+}
+
+.estado.novo {
+    background-color: #dbeafe; /* azul claro */
+    color: #1e40af;            /* azul escuro */
+}
+
+.estado.qualificado {
+    background-color: #ede9fe; /* roxo claro */
+    color: #5b21b6;            /* roxo escuro */
+}
+
+
+/* ------------------------------------------------
+   TABELAS
+   ------------------------------------------------ */
+
+/* SELETOR INDIVIDUAL */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Remove espaço entre células */
+}
+
+/* CLASSE — tabela compacta para o dashboard */
+.tabela-dashboard th,
+.tabela-dashboard td {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+}
+
+/* CLASSE — tabela completa para páginas de listagem */
+.tabela-completa th,
+.tabela-completa td {
+    padding: 0.9rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* SELETOR INDIVIDUAL */
+th {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-claro);
+    font-weight: 600;
+    text-align: left;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--cor-borda);
+}
+
+td {
+    border-bottom: 1px solid var(--cor-borda);
+    color: var(--cor-texto);
+    vertical-align: middle;
+}
+
+/* PSEUDO-CLASSE :last-child — remove borda da última linha */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* PSEUDO-CLASSE :hover nas linhas */
+tbody tr:hover {
+    background-color: #f8faff;
+    /* Azul muito claro ao passar o rato */
+}
+
+/* PSEUDO-CLASSE :nth-child — zebra striping */
+tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+
+/* ------------------------------------------------
+   BOTÕES DE AÇÃO NAS TABELAS
+   ------------------------------------------------ */
+
+/* CLASSE — célula com botões de ação */
+.acoes-celula {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+/* CLASSE — botão pequeno de ação */
+.btn-acao {
+    background: none;
+    border: 1px solid var(--cor-borda);
     border-radius: var(--raio);
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* PSEUDO-CLASSE :hover */
+.btn-acao:hover {
+    background-color: var(--cor-fundo);
+    border-color: var(--cor-primaria);
+}
+
+/* CLASSE — botão de perigo (vermelho ao hover) */
+.btn-acao-perigo:hover {
+    background-color: #fef2f2;
+    border-color: #ef4444;
+}
+
+
+/* ------------------------------------------------
+   FORMULÁRIOS
+   ------------------------------------------------ */
+
+/* CLASSE — painel de formulário expansível */
+.formulario-painel {
+    background-color: var(--cor-claro);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-grande);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
     box-shadow: var(--sombra);
 }
 
-.painel-checkout h3 {
-    color: var(--cor-secundaria);
-    font-size: 1.2rem;
-    border-bottom: 2px solid var(--cor-primaria);
-    padding-bottom: 0.5rem;
+/* SELETOR COMBINADO DESCENDENTE */
+.formulario-painel h3 {
+    font-size: 1.1rem;
+    color: var(--cor-texto);
+    font-weight: 600;
 }
 
-/* CLASSE .form-grupo */
+/* PSEUDO-ELEMENTO ::before — linha colorida no topo do formulário */
+.formulario-painel::before {
+    content: "";
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cor-primaria), #818cf8);
+    border-radius: var(--raio) var(--raio) 0 0;
+    margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+}
+
+/* CLASSE — grelha de 2 colunas para campos do formulário */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* CLASSE — grupo label + input */
 .form-grupo {
-    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+/* SELETOR COMBINADO ADJACENT SIBLING
+   Espaço extra entre grupos de formulário consecutivos */
+.form-grupo + .form-grupo {
+    margin-top: 0;
+    /* Já tem gap no form-grid, não precisa de margin extra */
+}
+
+/* CLASSE — campo que ocupa as 2 colunas */
+.form-grupo-largo {
+    grid-column: 1 / -1;
+    /* De coluna 1 até à última — ocupa tudo */
 }
 
 /* SELETOR COMBINADO DESCENDENTE */
 .form-grupo label {
-    display: block;
-    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: var(--cor-secundaria);
-    font-size: 0.9rem;
+    color: var(--cor-texto);
 }
 
+/* Aplica os mesmos estilos a inputs, selects e textareas */
 .form-grupo input,
-.form-grupo select {
-    width: 100%;
-    padding: 0.7rem;
-    border: 1px solid #ccc;
+.form-grupo select,
+.form-grupo textarea {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--cor-borda);
     border-radius: var(--raio);
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    font-size: 0.9rem;
+    font-family: inherit;
+    /* Herda a fonte do body */
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: var(--cor-claro);
 }
 
 /* PSEUDO-CLASSE :focus */
 .form-grupo input:focus,
-.form-grupo select:focus {
+.form-grupo select:focus,
+.form-grupo textarea:focus {
     outline: none;
     border-color: var(--cor-primaria);
-    box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.2);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    /* Anel de foco suave na cor primária */
 }
 
-/* PSEUDO-CLASSE :valid — campo com valor válido */
-.form-grupo input:valid {
-    border-color: #2a9d8f;
+/* PSEUDO-ELEMENTO ::placeholder — texto do placeholder */
+.form-grupo input::placeholder,
+.form-grupo textarea::placeholder {
+    color: #94a3b8;
+    font-size: 0.85rem;
 }
 
-/* PSEUDO-CLASSE :invalid com :not(:placeholder-shown)
-   Só mostra erro depois de o utilizador ter escrito algo */
+/* PSEUDO-CLASSE :valid */
+.form-grupo input:valid:not(:placeholder-shown) {
+    border-color: #22c55e;
+    /* Verde quando o campo está válido e preenchido */
+}
+
+/* PSEUDO-CLASSE :invalid com :not(:placeholder-shown) */
 .form-grupo input:invalid:not(:placeholder-shown) {
+    border-color: #ef4444;
+    /* Vermelho quando inválido e o utilizador já escreveu algo */
+}
+
+/* CLASSE — linha com botões do formulário */
+.form-acoes {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--cor-borda);
+}
+
+/* CLASSE — nota informativa no login */
+.login-nota {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--cor-texto-claro);
+    margin-top: 1rem;
+}
+
+
+/* ------------------------------------------------
+   FILTROS
+   ------------------------------------------------ */
+
+/* CLASSE — barra de filtros */
+.filtros-barra {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filtros-barra select,
+.filtros-barra input {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    font-size: 0.9rem;
+    background-color: var(--cor-claro);
+    color: var(--cor-texto);
+}
+
+/* PSEUDO-CLASSE :focus */
+.filtros-barra input:focus,
+.filtros-barra select:focus {
+    outline: none;
     border-color: var(--cor-primaria);
 }
 
-/* CLASSE .resumo-compra */
-.resumo-compra {
-    background-color: #e8f4f8;
-    border-left: 4px solid var(--cor-secundaria);
-    padding: 1rem 1.5rem;
-    border-radius: 0 var(--raio) var(--raio) 0;
-    margin-bottom: 2rem;
-    font-size: 1rem;
+/* PSEUDO-CLASSE :nth-child — destaque nos selects pares */
+.filtros-barra select:nth-child(even) {
+    border-color: var(--cor-primaria);
+}
+
+/* Faz a barra de pesquisa crescer para ocupar o espaço disponível */
+.filtros-barra input[type="text"] {
+    flex: 1;
+    min-width: 200px;
+}
+
+
+/* ------------------------------------------------
+   GRÁFICO DE BARRAS — Relatórios
+   ------------------------------------------------ */
+
+/* CLASSE — contentor do gráfico */
+.grafico-barras {
+    display: flex;
+    align-items: flex-end;
+    /* Alinha as barras pela base */
+    gap: 1rem;
+    height: 200px;
+    /* Altura fixa do gráfico */
+    padding: 1rem 0;
+    border-bottom: 2px solid var(--cor-borda);
+}
+
+/* CLASSE — grupo de barra + label */
+.barra-grupo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+/* CLASSE — a barra em si */
+.barra {
+    width: 100%;
+    background: linear-gradient(180deg, var(--cor-primaria), #818cf8);
+    /* Gradiente de cima para baixo */
+    border-radius: var(--raio) var(--raio) 0 0;
+    /* Cantos arredondados só em cima */
+    transition: opacity 0.2s;
+    min-height: 4px;
+}
+
+/* PSEUDO-CLASSE :hover na barra */
+.barra:hover {
+    opacity: 0.8;
+}
+
+/* CLASSE — label abaixo da barra */
+.barra-label {
+    font-size: 0.75rem;
+    color: var(--cor-texto-claro);
+    text-align: center;
 }
 
 
 /* ------------------------------------------------
    ÁREA DE ADMINISTRAÇÃO
    ------------------------------------------------ */
+
+/* CLASSE — layout de 2 colunas: sidebar + conteúdo */
 .admin-layout {
     display: grid;
-    grid-template-columns: 220px 1fr;
-    flex: 1; /* ocupa o espaço disponível entre header e footer */
+    grid-template-columns: 240px 1fr;
+    flex: 1;
+    min-height: calc(100vh - 60px);
+    /* Altura mínima = altura da janela menos o cabeçalho */
 }
 
-.admin-sidebar {
+/* SELETOR COMBINADO FILHO DIRETO */
+.admin-layout > aside {
     background-color: var(--cor-secundaria);
-    padding: 2rem 0;
+}
+
+/* CLASSE — sidebar do admin */
+.admin-sidebar {
+    padding: 1.5rem 0;
 }
 
 .admin-sidebar a {
-    display: block;
-    color: var(--cor-claro);
-    padding: 0.9rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.8rem 1.5rem;
     text-decoration: none;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-    border-left: 4px solid transparent;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
 }
 
-/* PSEUDO-CLASSE :hover e CLASSE .ativo combinados */
+/* PSEUDO-CLASSE :hover e CLASSE .ativo */
 .admin-sidebar a:hover,
 .admin-sidebar a.ativo {
-    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--cor-claro);
+    background-color: rgba(255, 255, 255, 0.08);
     border-left-color: var(--cor-primaria);
 }
 
+/* PSEUDO-ELEMENTO ::after — indicador no item ativo */
+.admin-sidebar a.ativo::after {
+    content: "◀";
+    margin-left: auto;
+    font-size: 0.7rem;
+    color: var(--cor-primaria);
+}
+
+/* CLASSE — área de conteúdo do admin */
 .admin-conteudo {
     padding: 2rem;
     background-color: var(--cor-fundo);
-}
-
-/* SELETOR INDIVIDUAL — tabela */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: var(--cor-claro);
-    border-radius: var(--raio);
-    overflow: hidden;
-    box-shadow: var(--sombra);
-}
-
-/* PSEUDO-CLASSE :nth-child(even) — linhas pares com cor diferente (zebra) */
-tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
-
-/* PSEUDO-CLASSE :hover nas linhas da tabela */
-tbody tr:hover {
-    background-color: #e8f4f8;
-}
-
-/* SELETOR INDIVIDUAL — cabeçalho da tabela */
-th {
-    background-color: var(--cor-secundaria);
-    color: var(--cor-claro);
-    padding: 1rem;
-    text-align: left;
-    font-size: 0.9rem;
-}
-
-td {
-    padding: 0.8rem 1rem;
-    border-bottom: 1px solid #eee;
-    font-size: 0.9rem;
-    vertical-align: middle;
-}
-
-/* PSEUDO-CLASSE :last-child — remove a borda da última linha */
-tbody tr:last-child td {
-    border-bottom: none;
+    overflow-y: auto;
 }
 
 
 /* ------------------------------------------------
    RODAPÉ
    ------------------------------------------------ */
+
+/* SELETOR INDIVIDUAL */
 footer {
     background-color: var(--cor-secundaria);
-    color: var(--cor-claro);
+    color: rgba(255, 255, 255, 0.6);
     text-align: center;
-    padding: 1.5rem;
+    padding: 1rem;
+    font-size: 0.85rem;
     margin-top: auto;
 }
 
-/* PSEUDO-ELEMENTO ::after — adiciona texto depois do conteúdo do footer */
+/* PSEUDO-ELEMENTO ::after */
 footer::after {
     content: " | Todos os direitos reservados";
-    font-size: 0.85rem;
-    opacity: 0.7;
 }
 
 
 /* ------------------------------------------------
-   MENU HAMBURGUER — visível apenas em mobile
+   MENU HAMBURGUER — só visível em mobile
    ------------------------------------------------ */
+
 .menu-toggle {
     display: none;
     background: none;
     border: none;
     color: white;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     cursor: pointer;
+    padding: 0.3rem;
 }
 
 
@@ -544,21 +906,16 @@ footer::after {
    MEDIA QUERIES — RESPONSIVIDADE
    ================================================ */
 
-/* TABLET — ecrãs até 900px de largura */
-@media (max-width: 900px) {
+/* TABLET — até 1024px */
+@media (max-width: 1024px) {
 
-    /* Grid de 3 colunas passa a 2 */
-    .eventos-grid {
+    /* Métricas de 4 colunas para 2 */
+    .metricas-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Detalhe do evento: imagem e info passam a coluna única */
-    .detalhe-evento {
-        grid-template-columns: 1fr;
-    }
-
-    /* Checkout: dois painéis passam a coluna única */
-    .checkout-container {
+    /* Dashboard de 2 colunas para 1 */
+    .dashboard-grid {
         grid-template-columns: 1fr;
     }
 
@@ -571,13 +928,15 @@ footer::after {
         display: flex;
         flex-wrap: wrap;
         padding: 0.5rem;
+        gap: 0.2rem;
     }
 
     .admin-sidebar a {
         padding: 0.5rem 1rem;
         border-left: none;
-        border-bottom: 4px solid transparent;
-        font-size: 0.9rem;
+        border-bottom: 3px solid transparent;
+        font-size: 0.85rem;
+        border-radius: var(--raio);
     }
 
     .admin-sidebar a:hover,
@@ -585,78 +944,101 @@ footer::after {
         border-left-color: transparent;
         border-bottom-color: var(--cor-primaria);
     }
+
+    /* Remove o indicador ◀ em tablet */
+    .admin-sidebar a.ativo::after {
+        display: none;
+    }
 }
 
 
-/* MOBILE — ecrãs até 600px de largura */
-@media (max-width: 600px) {
+/* MOBILE — até 768px */
+@media (max-width: 768px) {
 
-    /* Grid passa a 1 coluna */
-    .eventos-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* O menu de navegação fica escondido por defeito */
+    /* Menu de navegação escondido por defeito */
     header nav {
         display: none;
         flex-direction: column;
+        align-items: flex-start;
         position: absolute;
-        top: 62px;
+        top: 60px;
         left: 0;
         right: 0;
         background-color: var(--cor-secundaria);
-        padding: 1rem 2rem;
+        padding: 1rem;
         z-index: 99;
-        box-shadow: var(--sombra);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        gap: 0.3rem;
     }
 
-    /* Quando tem a classe .aberto (adicionada pelo JavaScript), aparece */
+    /* Quando tem classe .aberto, aparece */
     header nav.aberto {
         display: flex;
     }
 
     header nav a {
-        margin: 0.5rem 0;
-        font-size: 1.1rem;
+        width: 100%;
+        padding: 0.7rem 1rem;
     }
 
-    /* O botão hamburguer aparece */
+    /* Botão hamburguer aparece */
     .menu-toggle {
         display: block;
     }
 
-    /* Título do hero mais pequeno */
-    .hero h1 {
-        font-size: 1.6rem;
+    /* Métricas em 1 coluna */
+    .metricas-grid {
+        grid-template-columns: 1fr 1fr;
+        /* Ainda 2 em mobile para não ficar muito alto */
     }
 
-    .hero p {
-        font-size: 1rem;
+    /* Conteúdo com menos padding */
+    .pagina-conteudo {
+        padding: 1rem;
     }
 
-    /* Pesquisa em coluna */
-    .pesquisa-container {
+    /* Título da página em coluna */
+    .pagina-titulo {
         flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Formulário em 1 coluna */
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grupo-largo {
+        grid-column: 1;
     }
 
     /* Filtros em coluna */
-    .filtros {
+    .filtros-barra {
         flex-direction: column;
         align-items: stretch;
     }
 
-    .filtros select,
-    .filtros button {
-        width: 100%;
-    }
-
-    /* Tabela admin com scroll horizontal */
-    table {
-        display: block;
+    /* Tabelas com scroll horizontal */
+    .card-secao {
         overflow-x: auto;
     }
 
-    .secao {
-        padding: 1.5rem 1rem;
+    /* Caixa de login ocupa mais espaço */
+    .caixa-login {
+        padding: 1.5rem;
+    }
+}
+
+
+/* MOBILE PEQUENO — até 480px */
+@media (max-width: 480px) {
+
+    /* Métricas em 1 coluna */
+    .metricas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .metrica-valor {
+        font-size: 1.4rem;
     }
 }

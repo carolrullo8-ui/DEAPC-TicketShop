@@ -1,78 +1,122 @@
 <!DOCTYPE html>
+<!-- Declara que é HTML5 -->
 <html lang="pt">
+<!-- lang="pt" indica que o idioma é português -->
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TicketShop — Compra de Bilhetes Online</title>
-    <link rel="stylesheet" href="styles/style.css">
-</head>
-<body>
+    <!-- Permite acentos e caracteres portugueses -->
 
-    <header>
-        <a href="index.html" class="logo">🎟 TicketShop</a>
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <nav id="menu-principal">
-            <a href="index.html">Início</a>
-            <a href="eventos.html">Eventos</a>
-            <a href="#" class="btn-primario">Login / Registo</a>
-        </nav>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Essencial para responsividade mobile -->
+
+    <title>MarketingAuto — Login</title>
+    <!-- Texto que aparece no separador do browser -->
+
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- Liga o ficheiro CSS a esta página -->
+</head>
+
+<body class="pagina-login">
+<!-- class="pagina-login" aplica fundo especial só nesta página -->
+
+    <!-- CABEÇALHO SIMPLES — só o logo -->
+    <header class="header-login">
+    <!-- Header mais simples que nas outras páginas — sem menu -->
+
+        <div class="logo">
+            🎯 <span>MarketingAuto</span>
+            <!-- 🎯 é o emoji de alvo — representa marketing direcionado -->
+        </div>
+
     </header>
 
-    <section class="hero">
-        <h1>Os melhores eventos ao teu alcance</h1>
-        <p>Compra bilhetes online de forma simples, rápida e segura.</p>
-        <div class="pesquisa-container">
-            <input type="text" placeholder="Pesquisar eventos...">
-            <button class="btn-primario">🔍 Pesquisar</button>
-        </div>
-    </section>
+    <!-- ÁREA CENTRAL DE LOGIN -->
+    <main class="main-login">
+    <!-- Centra o formulário vertical e horizontalmente -->
 
-    <main>
-        <section class="secao">
-            <h2>Eventos em Destaque</h2>
-            <div class="eventos-grid">
+        <div class="caixa-login">
+        <!-- Caixa branca com sombra que contém o formulário -->
 
-                <article class="card-evento">
-                    <img src="images/evento1.jpg" alt="Concerto de Rock Lisboa">
-                    <div class="card-corpo">
-                        <h3>Concerto de Rock Lisboa</h3>
-                        <p>📅 15 de Junho de 2025</p>
-                        <p>📍 Altice Arena, Lisboa</p>
-                        <p class="preco">35,00 €</p>
-                        <a href="evento-detalhe.html" class="btn-primario">Ver Detalhes</a>
-                    </div>
-                </article>
+            <div class="login-titulo">
+                <h1>🎯 MarketingAuto</h1>
+                <!-- Título principal — só deve existir um h1 por página -->
 
-                <article class="card-evento">
-                    <img src="images/evento2.jpg" alt="Festival de Jazz Porto">
-                    <div class="card-corpo">
-                        <h3>Festival de Jazz Porto</h3>
-                        <p>📅 22 de Junho de 2025</p>
-                        <p>📍 Casa da Música, Porto</p>
-                        <p class="preco">20,00 €</p>
-                        <a href="evento-detalhe.html" class="btn-primario">Ver Detalhes</a>
-                    </div>
-                </article>
+                <p>Plataforma de Automatização de Marketing</p>
+                <!-- Subtítulo descritivo -->
+            </div>
 
-                <article class="card-evento">
-                    <img src="images/evento3.jpg" alt="Peça de Teatro">
-                    <div class="card-corpo">
-                        <h3>Hamlet — Teatro Nacional</h3>
-                        <p>📅 30 de Junho de 2025</p>
-                        <p>📍 Teatro Nacional D. Maria II</p>
-                        <p class="preco">15,00 €</p>
-                        <a href="evento-detalhe.html" class="btn-primario">Ver Detalhes</a>
-                    </div>
-                </article>
+            <!-- FORMULÁRIO DE LOGIN -->
+            <div class="form-login">
+            <!-- 
+                Usamos div em vez de form por agora
+                O form será implementado no W2 com PHP
+            -->
+
+                <div class="form-grupo">
+                <!-- Agrupa o label e o input para o CSS os alinhar -->
+
+                    <label for="username">Username</label>
+                    <!-- for="username" liga ao input com id="username" -->
+
+                    <input type="text" 
+                           id="username" 
+                           name="username"
+                           placeholder="Ex: gestor.marketing"
+                           required>
+                    <!-- 
+                        type="text" aceita qualquer texto
+                        required torna o campo obrigatório
+                        placeholder dá uma dica ao utilizador
+                    -->
+                </div>
+
+                <div class="form-grupo">
+                    <label for="password">Password</label>
+
+                    <input type="password" 
+                           id="password" 
+                           name="password"
+                           placeholder="A tua password"
+                           required>
+                    <!-- 
+                        type="password" esconde o texto escrito
+                        Aparece como pontos ou asteriscos
+                    -->
+                </div>
+
+                <button class="btn-primario btn-login" 
+                        onclick="window.location.href='dashboard.html'">
+                    Entrar →
+                </button>
+                <!-- 
+                    onclick="..." redireciona para o dashboard ao clicar
+                    No W2 isto será substituído por um formulário PHP real
+                -->
+
+                <p class="login-nota">
+                    Acesso restrito a utilizadores autorizados.
+                </p>
+                <!-- Nota informativa abaixo do botão -->
 
             </div>
-        </section>
+            <!-- fim do form-login -->
+
+        </div>
+        <!-- fim da caixa-login -->
+
     </main>
 
-    <footer>
-        <p>© 2025 TicketShop</p>
+    <!-- RODAPÉ -->
+    <footer class="footer-login">
+        <p>© 2025 MarketingAuto</p>
     </footer>
 
     <script src="scripts/main.js"></script>
+    <!-- 
+        Liga o JavaScript — fica no fim do body
+        para o HTML carregar antes do script correr
+    -->
+
 </body>
 </html>

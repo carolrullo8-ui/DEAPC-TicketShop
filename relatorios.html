@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketingAuto — Relatórios</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <header>
+        <a href="dashboard.html" class="logo">🎯 MarketingAuto</a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="menu-principal">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="campanhas.html">Campanhas</a>
+            <a href="leads.html">Leads</a>
+            <a href="relatorios.html" class="ativo">Relatórios</a>
+            <span class="nav-utilizador">Olá, <strong>Gestor</strong></span>
+            <a href="index.html" class="btn-primario">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="pagina-conteudo">
+
+            <div class="pagina-titulo">
+                <div>
+                    <h1>Relatórios</h1>
+                    <p>Analisa o desempenho das tuas campanhas</p>
+                </div>
+            </div>
+
+            <!-- FILTROS DE RELATÓRIO -->
+            <div class="filtros-barra">
+                <select id="filtro-campanha">
+                    <option value="">Selecionar campanha...</option>
+                    <option value="1">Campanha Verão 2025</option>
+                    <option value="2">Newsletter Junho</option>
+                    <option value="3">Black Friday Antecipado</option>
+                </select>
+
+                <select id="filtro-periodo">
+                    <option value="7">Últimos 7 dias</option>
+                    <option value="30">Últimos 30 dias</option>
+                    <option value="90">Últimos 3 meses</option>
+                    <option value="365">Último ano</option>
+                </select>
+
+                <button class="btn-primario">Ver Relatório</button>
+            </div>
+
+            <!-- CARDS DE MÉTRICAS DO RELATÓRIO -->
+            <section class="metricas-grid">
+
+                <div class="card-metrica card-metrica-grande">
+                    <div class="metrica-icone">📤</div>
+                    <div class="metrica-info">
+                        <span class="metrica-valor">500</span>
+                        <span class="metrica-label">Emails Enviados</span>
+                    </div>
+                </div>
+
+                <div class="card-metrica card-metrica-grande">
+                    <div class="metrica-icone">📬</div>
+                    <div class="metrica-info">
+                        <span class="metrica-valor">210</span>
+                        <span class="metrica-label">Emails Abertos</span>
+                        <span class="metrica-percentagem">42%</span>
+                        <!-- Percentagem como informação adicional -->
+                    </div>
+                </div>
+
+                <div class="card-metrica card-metrica-grande">
+                    <div class="metrica-icone">🖱️</div>
+                    <div class="metrica-info">
+                        <span class="metrica-valor">98</span>
+                        <span class="metrica-label">Cliques</span>
+                        <span class="metrica-percentagem">20%</span>
+                    </div>
+                </div>
+
+                <div class="card-metrica card-metrica-grande">
+                    <div class="metrica-icone">✅</div>
+                    <div class="metrica-info">
+                        <span class="metrica-valor">23</span>
+                        <span class="metrica-label">Conversões</span>
+                        <span class="metrica-percentagem">5%</span>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- GRÁFICO DE ENVOLVIMENTO (representação visual simples) -->
+            <section class="card-secao">
+                <h2>Envolvimento por Dia</h2>
+                <br>
+
+                <div class="grafico-barras">
+                <!-- Gráfico de barras feito com CSS puro -->
+
+                    <div class="barra-grupo">
+                        <div class="barra" style="height: 60%;">
+                        <!-- style="height:X%" define a altura da barra proporcionalmente -->
+                        </div>
+                        <span class="barra-label">Seg</span>
+                    </div>
+                    <div class="barra-grupo">
+                        <div class="barra" style="height: 80%;"></div>
+                        <span class="barra-label">Ter</span>
+                    </div>
+                    <div class="barra-grupo">
+                        <div class="barra" style="height: 45%;"></div>
+                        <span class="barra-label">Qua</span>
+                    </div>
+                    <div class="barra-grupo">
+                        <div class="barra" style="height: 90%;"></div>
+                        <span class="barra-label">Qui</span>
+                    </div>
+                    <div class="barra-grupo">
+                        <div class="barra" style="height: 70%;"></div>
+                        <span class="barra-label">Sex</span>
+                    </div>
+                    <div class="barra-grupo">
+                        <div class="barra" style="height: 30%;"></div>
+                        <span class="barra-label">Sáb</span>
+                    </div>
+                    <div class="barra-grupo">
+                        <div class="barra" style="height: 20%;"></div>
+                        <span class="barra-label">Dom</span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- TABELA DE LEADS ENVOLVIDOS -->
+            <section class="card-secao">
+                <h2>Leads com Maior Envolvimento</h2>
+                <br>
+                <table class="tabela-completa">
+                    <thead>
+                        <tr>
+                            <th>Lead</th>
+                            <th>Email</th>
+                            <th>Emails Abertos</th>
+                            <th>Cliques</th>
+                            <th>Última Interação</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>João Silva</td>
+                            <td>joao@xpto.pt</td>
+                            <td>8 / 10</td>
+                            <td>5</td>
+                            <td>03/06/2025</td>
+                            <td><span class="estado convertido">Convertido</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ana Costa</td>
+                            <td>ana@startup.pt</td>
+                            <td>6 / 10</td>
+                            <td>3</td>
+                            <td>01/06/2025</td>
+                            <td><span class="estado qualificado">Qualificado</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 MarketingAuto</p>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

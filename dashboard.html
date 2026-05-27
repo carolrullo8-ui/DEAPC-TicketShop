@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketingAuto — Dashboard</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <!-- CABEÇALHO COM MENU DE NAVEGAÇÃO -->
+    <header>
+        <a href="dashboard.html" class="logo">🎯 MarketingAuto</a>
+        <!-- Logo clicável que volta ao dashboard -->
+
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <!-- Botão hamburguer — só aparece em mobile -->
+
+        <nav id="menu-principal">
+            <a href="dashboard.html" class="ativo">Dashboard</a>
+            <!-- class="ativo" indica a página atual — CSS aplica estilo diferente -->
+
+            <a href="campanhas.html">Campanhas</a>
+            <a href="leads.html">Leads</a>
+            <a href="relatorios.html">Relatórios</a>
+
+            <span class="nav-utilizador">Olá, <strong>Gestor</strong></span>
+            <!-- Mostra o nome do utilizador autenticado -->
+            <!-- No W2 será preenchido dinamicamente pelo PHP -->
+
+            <a href="index.html" class="btn-primario">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="pagina-conteudo">
+        <!-- Contentor principal com padding e largura máxima -->
+
+            <div class="pagina-titulo">
+                <h1>Dashboard</h1>
+                <!-- Título da página atual -->
+                <p>Visão geral da tua atividade de marketing</p>
+            </div>
+
+            <!-- ====== CARDS DE MÉTRICAS ====== -->
+            <section class="metricas-grid">
+            <!-- 
+                <section> agrupa conteúdo relacionado
+                class="metricas-grid" aplica CSS Grid com 4 colunas
+            -->
+
+                <div class="card-metrica">
+                <!-- Cada card mostra uma métrica importante -->
+
+                    <div class="metrica-icone">📢</div>
+                    <!-- Ícone representativo da métrica -->
+
+                    <div class="metrica-info">
+                        <span class="metrica-valor">12</span>
+                        <!-- Valor numérico em destaque -->
+                        <span class="metrica-label">Campanhas Ativas</span>
+                        <!-- Descrição da métrica -->
+                    </div>
+                </div>
+
+                <div class="card-metrica">
+                    <div class="metrica-icone">👥</div>
+                    <div class="metrica-info">
+                        <span class="metrica-valor">348</span>
+                        <span class="metrica-label">Total de Leads</span>
+                    </div>
+                </div>
+
+                <div class="card-metrica">
+                    <div class="metrica-icone">📧</div>
+                    <div class="metrica-info">
+                        <span class="metrica-valor">42%</span>
+                        <span class="metrica-label">Taxa de Abertura</span>
+                        <!-- Percentagem de emails abertos -->
+                    </div>
+                </div>
+
+                <div class="card-metrica">
+                    <div class="metrica-icone">🖱️</div>
+                    <div class="metrica-info">
+                        <span class="metrica-valor">18%</span>
+                        <span class="metrica-label">Taxa de Cliques</span>
+                        <!-- Percentagem de cliques nos links -->
+                    </div>
+                </div>
+
+            </section>
+            <!-- fim das métricas -->
+
+
+            <!-- ====== SECÇÃO INFERIOR: CAMPANHAS + LEADS ====== -->
+            <div class="dashboard-grid">
+            <!-- 
+                CSS Grid com 2 colunas
+                Coluna esquerda: campanhas recentes
+                Coluna direita: leads recentes
+            -->
+
+                <!-- CAMPANHAS RECENTES -->
+                <section class="card-secao">
+                <!-- class="card-secao" aplica fundo branco e sombra -->
+
+                    <div class="secao-header">
+                    <!-- Cabeçalho da secção com título e link -->
+
+                        <h2>Campanhas Recentes</h2>
+                        <a href="campanhas.html" class="link-ver-todas">Ver todas →</a>
+                        <!-- Link para a página completa de campanhas -->
+                    </div>
+
+                    <table class="tabela-dashboard">
+                    <!-- Tabela compacta para o dashboard -->
+
+                        <thead>
+                            <tr>
+                            <!-- <tr> é uma linha da tabela -->
+                                <th>Nome</th>
+                                <!-- <th> é uma célula de cabeçalho (negrito por defeito) -->
+                                <th>Estado</th>
+                                <th>Leads</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Campanha Verão 2025</td>
+                                <!-- <td> é uma célula de dados normal -->
+                                <td><span class="estado ativa">Ativa</span></td>
+                                <!-- 
+                                    class="estado ativa" aplica badge colorido
+                                    Duas classes: "estado" (base) + "ativa" (cor verde)
+                                -->
+                                <td>120</td>
+                            </tr>
+                            <tr>
+                                <td>Newsletter Junho</td>
+                                <td><span class="estado pausada">Pausada</span></td>
+                                <td>85</td>
+                            </tr>
+                            <tr>
+                                <td>Promoção PMEs</td>
+                                <td><span class="estado rascunho">Rascunho</span></td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>Black Friday Antecipado</td>
+                                <td><span class="estado ativa">Ativa</span></td>
+                                <td>210</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </section>
+
+
+                <!-- LEADS RECENTES -->
+                <section class="card-secao">
+
+                    <div class="secao-header">
+                        <h2>Leads Recentes</h2>
+                        <a href="leads.html" class="link-ver-todas">Ver todos →</a>
+                    </div>
+
+                    <table class="tabela-dashboard">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Empresa</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>João Silva</td>
+                                <td>XPTO Lda</td>
+                                <td><span class="estado novo">Novo</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ana Costa</td>
+                                <td>Startup ABC</td>
+                                <td><span class="estado contactado">Contactado</span></td>
+                            </tr>
+                            <tr>
+                                <td>Pedro Ferreira</td>
+                                <td>PME XYZ</td>
+                                <td><span class="estado convertido">Convertido</span></td>
+                            </tr>
+                            <tr>
+                                <td>Maria Santos</td>
+                                <td>Tech SA</td>
+                                <td><span class="estado novo">Novo</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </section>
+
+            </div>
+            <!-- fim do dashboard-grid -->
+
+        </div>
+        <!-- fim do pagina-conteudo -->
+    </main>
+
+    <footer>
+        <p>© 2025 MarketingAuto</p>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
